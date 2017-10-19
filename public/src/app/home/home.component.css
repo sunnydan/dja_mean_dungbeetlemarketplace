@@ -1,0 +1,17 @@
+#content {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+#loginregistration {
+    display: flex;
+    justify-content: space-around;
+}
+#login {
+    border: solid black 1px;
+}
+#registration {
+    border: solid black 1px;
+}
+#loginregistration [type^="submit"] {
+    width: 100%;
+}

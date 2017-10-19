@@ -1,5 +1,6 @@
-//var dungbeetles = require('../controllers/dungbeetles.js');
-//var dungballs = require('../controllers/dungballs.js');
+var dungbeetles = require('../controllers/dungbeetles.js');
+var dungballs = require('../controllers/dungballs.js');
+const path = require("path");
 
 module.exports = function (app) {
 
@@ -53,7 +54,7 @@ module.exports = function (app) {
         /* and respond with a success of failed message */
     });
 
-    app.all("*", (req,res,next) => {
+    app.use((req,res,next) => {
         res.sendFile(path.resolve("./public/dist/index.html"))
     });
 }
