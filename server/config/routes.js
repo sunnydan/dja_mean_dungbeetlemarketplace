@@ -4,55 +4,31 @@ const path = require("path");
 
 module.exports = function (app) {
 
-    app.get('/dungbeetles', (req, res, next) => {
-        /* retrieve the dungbeetles from the database */
-        /* and respond with the dungbeetles using 'res.json(dungbeetles)' */
-    });
+    app.get('/dungbeetles', dungbeetles.retrieveAll);
 
-    app.get('/dungbeetles/:id', (req, res, next) => {
-        /* retrieve the product from the database (find the product by the req.params.id)  */
-        /* and respond with the product using 'res.json(product)' */
-    });
+    app.get('/dungbeetles/:id', dungbeetles.retrieveOne);
 
-    app.post('/dungbeetles', (req, res, next) => {
-        /* create a product, and respond with a success of failed message */
-    });
+    app.get('/dungbeetles/l/oggedin', dungbeetles.retrieveLoggedIn);
 
-    app.put('/dungbeetles/:id', (req, res, next) => {
-        /* update the product (find the product by the req.params.id) */
-        /* update that product with the posted product found through the req.body */
-        /* and respond with the updated version of the product */
-    });
+    app.post('/dungbeetles', dungbeetles.create);
 
-    app.delete('/dungbeetles/:id', (req, res, next) => {
-        /* delete the product (find the product by the req.params.id) */
-        /* and respond with a success of failed message */
-    });
+    app.post('/dungbeetles/login', dungbeetles.login);
 
-    app.get('/dungballs', (req, res, next) => {
-        /* retrieve the dungballs from the database */
-        /* and respond with the dungballs using 'res.json(dungballs)' */
-    });
+    app.get('/dungbeetles/l/ogout', dungbeetles.logout);
 
-    app.get('/dungballs/:id', (req, res, next) => {
-        /* retrieve the product from the database (find the product by the req.params.id)  */
-        /* and respond with the product using 'res.json(product)' */
-    });
+    app.put('/dungbeetles/:id', dungbeetles.update);
 
-    app.post('/dungballs', (req, res, next) => {
-        /* create a product, and respond with a success of failed message */
-    });
+    app.delete('/dungbeetles/:id', dungbeetles.destroy);
 
-    app.put('/dungballs/:id', (req, res, next) => {
-        /* update the product (find the product by the req.params.id) */
-        /* update that product with the posted product found through the req.body */
-        /* and respond with the updated version of the product */
-    });
+    app.get('/dungballs', dungballs.retrieveAll);
 
-    app.delete('/dungballs/:id', (req, res, next) => {
-        /* delete the product (find the product by the req.params.id) */
-        /* and respond with a success of failed message */
-    });
+    app.get('/dungballs/:id', dungballs.retrieveOne);
+
+    app.post('/dungballs', dungballs.create);
+
+    app.put('/dungballs/:id', dungballs.update);
+
+    app.delete('/dungballs/:id', dungballs.destroy);
 
     app.use((req,res,next) => {
         res.sendFile(path.resolve("./public/dist/index.html"))

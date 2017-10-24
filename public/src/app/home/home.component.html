@@ -1,28 +1,28 @@
 <div id="content">
     <div id="dotd">
         <h3>Dungball of the day!</h3>
-        <app-dungball></app-dungball>
+        <app-dungball [dungball]='dotd' [loggedinbeetle]="null"></app-dungball>
     </div>
     <br>
     <div id="loginregistration">
         <div id="login">
             <table>
-                <form action="">
+                <form #loginForm="ngForm" (submit)='onLogin()' novalidate>
                     <tr>
-                        <td>*Email</td>
+                        <td>Email</td>
                         <td>
-                            <input type="email">
+                            <input type="email" name="email" [(ngModel)]='login_beetle.email' #email="ngModel" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>*Password</td>
+                        <td>Password</td>
                         <td>
-                            <input type="password">
+                            <input type="password" name="password" [(ngModel)]='login_beetle.password' #password="ngModel" required>
                         </td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="loginerrors" id="bered">
                         <td colspan="2">
-                            errors
+                            Invalid Credentials
                         </td>
                     </tr>
                     <tr>
@@ -35,40 +35,52 @@
         </div>
         <div id="registration">
             <table>
-                <form action="">
+                <form #registerForm="ngForm" (submit)='onRegister()' novalidate>
                     <tr>
-                        <td>*Name</td>
+                        <td [ngClass]="{'bered': name.errors && name.dirty, 'begreen': name.valid}">*Name</td>
                         <td>
-                            <input type="text" name="text">
+                            <input type="text" name="name" [(ngModel)]="register_beetle.name" #name="ngModel" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>*Email</td>
+                        <td [ngClass]="{'bered': email.errors && email.dirty, 'begreen': email.valid}">*Email</td>
                         <td>
-                            <input type="email">
+                            <input type="email" name="email" [(ngModel)]="register_beetle.email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                required>
                         </td>
                     </tr>
                     <tr>
                         <td>&nbsp;Shell Color</td>
                         <td>
-                            <input type="color" name="hexcolor" value="#000000" style="width: 96%;">
+                            <input type="color" name="color" [(ngModel)]="register_beetle.color" #color="ngModel" style="width: 96%;" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>*Password</td>
+                        <td [ngClass]="{'bered': password.errors && password.dirty, 'begreen': password.valid}">*Password</td>
                         <td>
-                            <input type="password">
+                            <input [attr.type]="password_state" name="password" [(ngModel)]="register_beetle.password" #password="ngModel" minlength="8"
+                                maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                        </td>
+                    </tr>
+                    <tr style="font-size: 12px;">
+                        <td colspan="2">
+                            must contain uppercase letter, lowercase letter, number
                         </td>
                     </tr>
                     <tr>
-                        <td>*Confirm Password</td>
+                        <td></td>
                         <td>
-                            <input type="password">
+                            <button type="button" (click)="showPassword()">show/hide password</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="indicates">
+                            * indicates a required field
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="submit" value="Register">
+                            <input type="submit" value="Register" [disabled]="!registerForm.form.valid">
                         </td>
                     </tr>
                 </form>

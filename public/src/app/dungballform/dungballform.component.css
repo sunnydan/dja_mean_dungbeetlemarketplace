@@ -1,0 +1,38 @@
+#dungball {
+    border: solid black 1px;
+    display: flex;
+    justify-content: space-between;
+}
+#text {
+    width: 100%;
+}
+#text div {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#text textarea {
+    width: 100%;
+    height: 50%;
+}
+#img_url {
+    height: 150px;
+    width: 150px;
+    margin-right: 15px;
+}
+#info {
+    text-align: center;
+    margin: 10px;
+}
+#pricefield {
+    width: 50%;
+}
+#cityfield {
+    max-width: 70px;
+}
+#statefield {
+    max-width: 25px;
+}

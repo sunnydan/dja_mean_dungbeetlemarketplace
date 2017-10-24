@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const DungBeetleSchema = new mongoose.Schema({
+const DungbeetleSchema = new mongoose.Schema({
+    //beetle information
     name: { type: String, required: true, maxlength: 20 },
-    email: { type: String, required: true },
+    color: { type: String, required: true, maxlength: 7 },
+    //account information
+    email: { type: String, required: true, unique: [true, "A Dungbeetle is already registered that email"] },
     password: { type: String, required: true },
-    hexcolor: { type: String, required: true, maxlength: 7 },
-    birthday: { type: Date, default: moment() },
+    created_at: { type: Date, default: moment() },
     updated_at: { type: Date, default: moment() },
-    dungballs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dungball' }]
 });
-const DungBeetle = mongoose.model('DungBeetle', DungBeetleSchema);
+
+const Dungbeetle = mongoose.model('Dungbeetle', DungbeetleSchema);
+console.log("Dungbeetle model loaded");

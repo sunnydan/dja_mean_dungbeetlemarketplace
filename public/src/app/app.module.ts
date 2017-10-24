@@ -12,6 +12,12 @@ import { BrowseComponent } from './browse/browse.component';
 import { ListingsComponent } from './listings/listings.component';
 import { DungballComponent } from './dungball/dungball.component';
 import { DungbeetleComponent } from './dungbeetle/dungbeetle.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DungballformComponent } from './dungballform/dungballform.component';
+import { FilterPipe } from './filter.pipe';
+import { SortPipe } from './sort.pipe';
+import { ReversePipe } from './reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import { DungbeetleComponent } from './dungbeetle/dungbeetle.component';
     BrowseComponent,
     ListingsComponent,
     DungballComponent,
-    DungbeetleComponent
+    DungbeetleComponent,
+    DashboardComponent,
+    NavbarComponent,
+    DungballformComponent,
+    FilterPipe,
+    SortPipe,
+    ReversePipe
   ],
   imports: [
     BrowserModule,

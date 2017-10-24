@@ -1,3 +1,16 @@
-<p>
-  browse works!
-</p>
+<app-navbar></app-navbar>
+<h1>Listings</h1>
+<input type="text" name="search" id="search" [(ngModel)]="searchterm" placeholder="Search">
+<span>
+  Sorting: 
+  <input  (click)="onMethodChange()" type="radio" name="order" value="alphabetical" [(ngModel)]="ordermethod">Alphabetical
+  <input  (click)="onMethodChange()" type="radio" name="order" value="radius" [(ngModel)]="ordermethod">Radius
+  <input  (click)="onMethodChange()" type="radio" name="order" value="price" [(ngModel)]="ordermethod">Price
+  <input  (click)="onMethodChange()" type="radio" name="order" value="chronological" [(ngModel)]="ordermethod">Chronological
+</span>
+<button id="reverseorder" (click)="onReverse()">Reverse Order</button>
+
+<div *ngFor="let ball of dungballs | filter:searchterm | sort:ordermethod | reverse:reverseorder">
+  <app-dungball [dungball]='ball' [loggedinbeetle]="loggedinbeetle"></app-dungball>
+  <br>
+</div>

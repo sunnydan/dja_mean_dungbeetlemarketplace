@@ -15,3 +15,13 @@
 #loginregistration [type^="submit"] {
     width: 100%;
 }
+#indicates {
+    text-align: center;
+    font-size: 12px;
+}
+.bered {
+    color: red;
+}
+.begreen {
+    color: green;
+}

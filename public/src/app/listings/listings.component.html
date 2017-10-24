@@ -1,3 +1,8 @@
-<p>
-  listings works!
-</p>
+<app-navbar></app-navbar>
+<h1>Create Listing</h1>
+<app-dungballform [mode]="'create'" [loggedinbeetle]="loggedinbeetle"></app-dungballform>
+<h1>Edit/Delete Listings</h1>
+<div *ngFor="let ball of dungballs;">
+  <app-dungball [dungball]='ball' [loggedinbeetle]="loggedinbeetle"></app-dungball>
+  <br>
+</div>

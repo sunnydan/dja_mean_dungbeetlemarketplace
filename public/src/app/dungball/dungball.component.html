@@ -1,18 +1,28 @@
-<div id="dungball">
-  <img src="" alt="image of a dungball">
-  <div id="text">
-    <div>
-      <h2>Best Dungball</h2>
-      <span>Radius: X</span>
+<div *ngIf="!editball">
+  <div id="dungball" [style.color]="dungball.color">
+    <img src="{{ dungball.img_url }}" alt="dungball image">
+    <div id="text">
+      <div>
+        <h2>{{ dungball.short_desc }}</h2>
+        <span>Radius: {{ dungball.radius }} inch(es)</span>
+        <button (click)="onRoll()" *ngIf="loggedinbeetle && loggedinbeetle._id == dungball.owner_id">Roll</button>
+      </div>
+      <span> {{ dungball.long_desc }} </span>
+      <p id="created_at">Created at: {{ dungball.created_at | date:'medium' }}</p>
     </div>
-    <span>
-      dungball dungball dungball dungball dungball dungball dungball dungball dungball dungball dungball dungball dungball dungball
-    </span>
+    <div id="info">
+      <h2>${{ dungball.price }}</h2>
+      <span>
+        {{ dungball.city }}
+        <span>, </span>{{ dungball.state }}
+      </span>
+      <br>
+      <button (click)="showOwner()" *ngIf="loggedinbeetle && loggedinbeetle._id != dungball.owner_id">Contact</button>
+      <button (click)="onEdit()" *ngIf="loggedinbeetle && loggedinbeetle._id == dungball.owner_id">Edit</button>
+      <button (click)="onDelete()" *ngIf="loggedinbeetle && loggedinbeetle._id == dungball.owner_id">Delete</button>
+    </div>
   </div>
-  <div id="info">
-    <h2>$munny</h2>
-    <p>
-      Dunghole, AR
-    </p>
-  </div>
+  <br *ngIf="showowner">
+  <app-dungbeetle *ngIf="showowner" [dungbeetle]="ownerbeetle" [loggedinbeetle]="loggedinbeetle"></app-dungbeetle>
 </div>
+<app-dungballform *ngIf="editball" [dungball]="dungball" [mode]="'edit'" [loggedinbeetle]="loggedinbeetle" (cancelEmitter)="onEdit()"></app-dungballform>

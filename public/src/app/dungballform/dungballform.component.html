@@ -1,0 +1,27 @@
+<form (submit)="onSubmit()">
+  <div id="dungball">
+    <input type="text" name="img_url" id="img_url" [(ngModel)]="dungball.img_url" #img_url="ngModel" placeholder="upload image url">
+    <div id="text">
+      <div>
+        <input type="text" name="short_desc" [(ngModel)]='dungball.short_desc' #short_desc="ngModel" maxlength="20" placeholder="Title"
+          required>
+        <span *ngIf="mode == 'create'">Radius: 1</span>
+        <span *ngIf="mode == 'edit'">Radius: {{ dungball.radius }}</span>
+      </div>
+      <textarea name="long_desc" [(ngModel)]='dungball.long_desc' #long_desc="ngModel" placeholder="Description" required></textarea>
+    </div>
+    <div id="info">
+      <h2>$
+        <input type="text" name="price" id="pricefield" [(ngModel)]='dungball.price' #price="ngModel" placeholder="Price" required>
+      </h2>
+      <p>
+        <input type="text" name="city" id="cityfield" [(ngModel)]='dungball.city' #city="ngModel" placeholder="Arlington" required>
+        <span>, </span>
+        <input type="text" name="state" id="statefield" [(ngModel)]='dungball.state' #state="ngModel" placeholder="VA" required>
+      </p>
+      <input *ngIf="mode == 'create'" type="submit" value="Create">
+      <input *ngIf="mode == 'edit'" type="submit" value="Update">
+      <button type="button" *ngIf="mode == 'edit'" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</form>

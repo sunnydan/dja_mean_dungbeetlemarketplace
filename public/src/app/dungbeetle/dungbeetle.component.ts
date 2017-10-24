@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Dungbeetle, DungbeetleService } from './../dungbeetle.service';
 
 @Component({
   selector: 'app-dungbeetle',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dungbeetle.component.css']
 })
 export class DungbeetleComponent implements OnInit {
+
+  dungbeetleService: DungbeetleService;
+  @Input() dungbeetle: Dungbeetle;
+  @Input() loggedinbeetle: Dungbeetle;
 
   constructor() { }
 

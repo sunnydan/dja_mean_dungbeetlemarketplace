@@ -1,18 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+export class Dungball {
+  //practical information
+  short_desc: string;
+  long_desc: string;
+  img_url: string;
+  radius: number;
+  color: string;
+  price: number;
+  //location information
+  city: string;
+  state: string;
+  //technical information
+  owner_id: string;
+  _id: string;
+  created_at: Date;
+  updated_at: Date;
+  last_viewed: Date;
+  
+  constructor() {}
+}
+
 @Injectable()
 export class DungballService {
-  dungballs = [];
 
   constructor(private _http: Http) { }
 
-  retrieveAll() {
-    return this._http.get(`/dungballs`)
-    .subscribe( 
-      (dungballs) => {
-        console.log('Successful response from the server');
-        this.dungballs = dungballs.json();
+  retrieveAll(callback) {
+    this._http.get(`/dungballs`).subscribe( 
+      (response) => {
+        console.log('Successful response of all dungballs from the server');
+        callback(null, response.json());
       },
       (err) => {
         console.log(err);
@@ -20,12 +39,11 @@ export class DungballService {
     )
   }
  
-  retrieveOne(id) {
-    return this._http.get(`/dungballs/${id}`)
-    .subscribe( 
+  retrieveOne(id, callback) {
+    this._http.get(`/dungballs/${id}`).subscribe( 
       (response) => {
-        console.log('Successful response from the server');
-        /* code */
+        console.log('Successful response of single dungball from the server');
+        callback(response.json());
       },
       (err) => {
         console.log(err);
@@ -33,12 +51,11 @@ export class DungballService {
     )
   }
  
-  create(dungball) {
-    return this._http.post(`/dungballs`, dungball)
-    .subscribe( 
+  create(dungball, callback) {
+    this._http.post(`/dungballs`, dungball).subscribe( 
       (response) => {
-        console.log('Successful response from the server');
-        /* code */
+        console.log('Successful creation of dungball on the server');
+        callback(response.json());
       },
       (err) => {
         console.log(err);
@@ -46,12 +63,11 @@ export class DungballService {
     )
   }
  
-  update(dungball, id) {
-    return this._http.put(`/dungballs/${id}`, dungball)
-    .subscribe( 
+  update(dungball, id, callback) {
+    this._http.put(`/dungballs/${id}`, dungball).subscribe( 
       (response) => {
-        console.log('Successful response from the server');
-        /* code */
+        console.log('Successful dungball update from the server');
+        callback(response.json());
       },
       (err) => {
         console.log(err);
@@ -59,17 +75,8 @@ export class DungballService {
     )
   }
  
-  destroy(id) {
-    return this._http.get(`/dungballs/${id}`)
-    .subscribe( 
-      (response) => {
-        console.log('Successful response from the server');
-        /* code */
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
+  destroy(id, callback) {
+    this._http.delete(`/dungballs/${id}`).subscribe();
   }
 
 }
